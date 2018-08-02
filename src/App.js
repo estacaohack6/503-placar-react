@@ -20,33 +20,10 @@ class App extends Component {
     });
   }
 
-  renomearCasa = (evento) => {
-    this.setState(
-      {
-        time1: evento.target.value
-      }
-    );
-  }
-
-  renomearVisitante = (evento) => {
-    this.setState(
-      {
-        time2: evento.target.value
-      }
-    );
-  }
-
   incrementar = time => {
-    if(time === "1"){
-      this.setState({
-        placar1: this.state.placar1 + 1
-      });
-    }
-    if(time === "2"){
-      this.setState({
-        placar2: this.state.placar2 + 1
-      });
-    }
+    let novoState = {};
+    novoState[`placar${time}`] = this.state[`placar${time}`] + 1;
+    this.setState(novoState);
   }
 
   render() {
@@ -59,9 +36,9 @@ class App extends Component {
       </div>
       <div className="controles">
         <label>Time da casa</label>
-        <input name="1" onChange={this.renomearCasa} type="text" placeholder="Digite o nome do time da casa" value={this.state.time1} />
+        <input name="1" onChange={evento => this.setState({time1: evento.target.value})} type="text" placeholder="Digite o nome do time da casa" value={this.state.time1} />
         <label>Time visitante</label>
-        <input name="2" onChange={this.renomearVisitante} type="text" placeholder="Digite o nome do time visitante" value={this.state.time2} />
+        <input name="2" onChange={evento => this.setState({time2: evento.target.value})} type="text" placeholder="Digite o nome do time visitante" value={this.state.time2} />
         <button onClick={this.reiniciar}>Reiniciar</button>
       </div>
       </div>
